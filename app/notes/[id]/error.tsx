@@ -1,6 +1,6 @@
 "use client";
 
-import css from "../filter/[...filters]/notes.module.css";
+import css from "../filter/[...slug]/notes.module.css";
 
 interface ErrorProps {
   error: Error;
