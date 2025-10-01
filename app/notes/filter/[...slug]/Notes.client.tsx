@@ -19,8 +19,8 @@ function NotesClient() {
   const [search, setSearch] = useState("");
   const [delayedSearch] = useDebounce(search, 500);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { filters } = useParams<{ filters: string[] }>();
-  const tag = filters[0] === "All" ? undefined : filters[0];
+  const { slug } = useParams<{ slug: string[] }>();
+  const tag = slug[0] === "All" ? undefined : slug[0];
 
   const { data, isSuccess, isError, error } = useQuery({
     queryKey: ["notes", currentPage, delayedSearch, tag],
