@@ -14,14 +14,16 @@ export interface FetchNoteParams {
     search?: string,
     page?: number,
     perPage?: number,
+    tag?: string,
 }
 
-export const fetchNotes = async ({page, perPage, search}: FetchNoteParams): Promise<FetchNoteResponse> => {
+export const fetchNotes = async ({page, perPage, search, tag}: FetchNoteParams): Promise<FetchNoteResponse> => {
     const response = await axios.get<FetchNoteResponse>(BASE_URL, {
         params: {
             page,
             perPage,
             search,
+            tag,
             sortBy: 'created',
         }
     })   

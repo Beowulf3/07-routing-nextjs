@@ -1,0 +1,1 @@
+export const tags = ['All', 'Work', 'Personal', 'Meeting', 'Shopping', 'Todo'];

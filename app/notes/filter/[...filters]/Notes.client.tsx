@@ -6,26 +6,30 @@ import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
 import css from "./notes.module.css";
-import { fetchNotes } from "../../lib/api";
-import NoteList from "../../components/NoteList/NoteList";
-import Pagination from "../../components/Pagination/Pagination";
+import { fetchNotes } from "../../../../lib/api";
+import NoteList from "../../../../components/NoteList/NoteList";
+import Pagination from "../../../../components/Pagination/Pagination";
 import SearchBox from "@/components/SearchBox/SearchBox";
 import Modal from "@/components/Modal/Modal";
 import NoteForm from "@/components/NoteForm/NoteForm";
+import { useParams } from "next/navigation";
 
 function NotesClient() {
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
   const [delayedSearch] = useDebounce(search, 500);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { filters } = useParams<{ filters: string[] }>();
+  const tag = filters[0] === "All" ? undefined : filters[0];
 
   const { data, isSuccess, isError, error } = useQuery({
-    queryKey: ["notes", currentPage, delayedSearch],
+    queryKey: ["notes", currentPage, delayedSearch, tag],
     queryFn: () =>
       fetchNotes({
         page: currentPage,
         perPage: 15,
         search: delayedSearch,
+        tag,
       }),
     placeholderData: keepPreviousData,
   });

@@ -1,10 +1,10 @@
-import { useEffect, type ReactNode } from "react";
+import { useEffect } from "react";
 import { createPortal } from "react-dom";
 
 import css from "./Modal.module.css";
 
 interface ModalProps {
-  children: ReactNode;
+  children: React.ReactNode;
   onClose: () => void;
 }
 
