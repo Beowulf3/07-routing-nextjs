@@ -8,7 +8,7 @@ import { fetchNotes } from "@/lib/api";
 import NotesClient from "./Notes.client";
 
 interface Props {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string[] }>;
 }
 
 const Notes = async ({ params }: Props) => {
@@ -31,7 +31,7 @@ const Notes = async ({ params }: Props) => {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <NotesClient />
+      <NotesClient tag={tag} />
     </HydrationBoundary>
   );
 };

@@ -12,15 +12,16 @@ import Pagination from "../../../../components/Pagination/Pagination";
 import SearchBox from "@/components/SearchBox/SearchBox";
 import Modal from "@/components/Modal/Modal";
 import NoteForm from "@/components/NoteForm/NoteForm";
-import { useParams } from "next/navigation";
 
-function NotesClient() {
+type NotesClientProps = {
+  tag?: string;
+};
+
+function NotesClient({ tag }: NotesClientProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
   const [delayedSearch] = useDebounce(search, 500);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { slug } = useParams<{ slug: string[] }>();
-  const tag = slug[0] === "All" ? undefined : slug[0];
 
   const { data, isSuccess, isError, error } = useQuery({
     queryKey: ["notes", currentPage, delayedSearch, tag],
